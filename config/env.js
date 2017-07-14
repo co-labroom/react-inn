@@ -14,6 +14,7 @@ if (!NODE_ENV) {
   );
 }
 
+//从项目根目录的.dotenv文件中加载环境变量配置
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
 var dotenvFiles = [
   `${paths.dotenv}.${NODE_ENV}.local`,
@@ -37,6 +38,8 @@ dotenvFiles.forEach(dotenvFile => {
   }
 });
 
+
+// 通过在.dotenv文件中设置NODE_PATH来相对目录引用的一长串../..问题
 // We support resolving modules according to `NODE_PATH`.
 // This lets you use absolute paths in imports inside large monorepos:
 // https://github.com/facebookincubator/create-react-app/issues/253.
@@ -47,15 +50,16 @@ dotenvFiles.forEach(dotenvFile => {
 // https://github.com/facebookincubator/create-react-app/issues/1023#issuecomment-265344421
 // We also resolve them to make sure all tools using them work consistently.
 const appDirectory = fs.realpathSync(process.cwd());
-process.env.NODE_PATH = (process.env.NODE_PATH || '')
+process.env.NODE_PATH = (process.env.NODE_PATH || '')  //过滤出NODE_PATH中的相对地址，并得到绝对地址
   .split(path.delimiter)
   .filter(folder => folder && !path.isAbsolute(folder))
   .map(folder => path.resolve(appDirectory, folder))
   .join(path.delimiter);
 
+// 收集NODE_ENV和REACT_APP_*，PUBLIC_URL环境变量
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be
 // injected into the application via DefinePlugin in Webpack configuration.
-const REACT_APP = /^REACT_APP_/i;
+const REACT_APP = /^REACT_APP_/i;   //用户过滤REACT_APP_开头的环境配置
 
 function getClientEnvironment(publicUrl) {
   const raw = Object.keys(process.env)
@@ -73,10 +77,11 @@ function getClientEnvironment(publicUrl) {
         // For example, <img src={process.env.PUBLIC_URL + '/img/logo.png'} />.
         // This should only be used as an escape hatch. Normally you would put
         // images into the `src` and `import` them in code to get their paths.
-        PUBLIC_URL: publicUrl,
+        PUBLIC_URL: publicUrl,          //作为一个资源引用的逃生舱，通常你可以import来得到他们的路径
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin
+  //String化配置参数，以方便使用webpack DefinePlugin在js中注入环境变量
   const stringified = {
     'process.env': Object.keys(raw).reduce((env, key) => {
       env[key] = JSON.stringify(raw[key]);
@@ -84,7 +89,8 @@ function getClientEnvironment(publicUrl) {
     }, {}),
   };
 
-  return { raw, stringified };
+  //raw用于注入html，
+  return {raw, stringified};
 }
 
 module.exports = getClientEnvironment;

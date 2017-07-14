@@ -9,6 +9,7 @@ const url = require('url');
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
+//设置环境变量PUBLIC_URL
 const envPublicUrl = process.env.PUBLIC_URL;
 
 function ensureSlash(path, needsSlash) {
@@ -22,6 +23,7 @@ function ensureSlash(path, needsSlash) {
   }
 }
 
+//使用`PUBLIC_URL`环境变量或者package.json的homepage字段
 const getPublicUrl = appPackageJson =>
 envPublicUrl || require(appPackageJson).homepage;
 
@@ -37,6 +39,8 @@ function getServedPath(appPackageJson) {
     envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/');
   return ensureSlash(servedUrl, true);
 }
+
+console.log(getServedPath(resolveApp('package.json')));
 
 // console.log(resolveApp('.env'));
 
