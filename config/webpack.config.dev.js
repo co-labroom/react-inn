@@ -43,8 +43,13 @@ module.exports = {
     // the line below with these two lines if you prefer the stock client:
     // require.resolve('webpack-dev-server/client') + '?/',
     // require.resolve('webpack/hot/dev-server'),
+<<<<<<< HEAD
     require.resolve('react-dev-utils/webpackHotDevClient'),   //用于对webpackdevServer 通信，获取到文件的改变通知
     // require.resolve('react-hot-loader/patch'),
+=======
+    // require.resolve('react-dev-utils/webpackHotDevClient'),   //用于对webpackdevServer 通信，获取到文件的改变通知
+    require.resolve('react-hot-loader/patch'),
+>>>>>>> 0fbde82b6105b91d61375fad52e0cf9eaa802204
     // We ship a few polyfills by default:
     require.resolve('./polyfills'),
     // Errors should be considered fatal in development
