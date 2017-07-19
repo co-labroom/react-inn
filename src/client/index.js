@@ -5,33 +5,22 @@
 // @flow
 import React from 'react'
 import ReactDOM from 'react-dom'
-<<<<<<< HEAD
 import {AppContainer} from 'react-hot-loader'
 import {Provider} from 'react-redux'
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {BrowserRouter} from 'react-router-dom'
-=======
-import { AppContainer } from 'react-hot-loader'
-import { Provider } from 'react-redux'
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import { BrowserRouter } from 'react-router-dom'
->>>>>>> 0fbde82b6105b91d61375fad52e0cf9eaa802204
 
 import App from './app'
 import helloReducer from './reducer/hello'
+import todoListReducer from './reducer/todoList'
 
 const isProd = process.env.NODE_ENV
 const APP_CONTAINER_SELECTOR = process.env.REACT_APP_CONTAINER_SELECTOR
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 
-<<<<<<< HEAD
-const store = createStore(combineReducers({hello: helloReducer}),
-=======
-const store = createStore(combineReducers({ hello: helloReducer }),
->>>>>>> 0fbde82b6105b91d61375fad52e0cf9eaa802204
+const store = createStore(combineReducers({hello: helloReducer, todoList: todoListReducer}),
   composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 const rootEl = document.querySelector(APP_CONTAINER_SELECTOR)
