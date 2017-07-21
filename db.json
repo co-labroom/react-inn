@@ -1,0 +1,27 @@
+{
+  "login": {
+    "code": 0,
+    "msg": "OK",
+    "data": {
+      "id": "35",
+      "account": "57541994019a2",
+      "usertype": "2",
+      "name": "啊啊啊啊",
+      "avatar": "/caiker/avatar/3b7d/43ac/4f4c/6935/abb2/e48f/516e/caef/3b7d43ac4f4c6935abb2e48f516ecaef.jpg",
+      "sex": "2",
+      "phone": "15850243619",
+      "email": "Abc@QQ.com",
+      "emailverify": "0",
+      "city": null,
+      "created": "0",
+      "lastlogin": "1479782865000",
+      "status": "1",
+      "failed_count": "0",
+      "lock_expired_time": "0",
+      "is_bind_wechat": 1,
+      "is_bind_qq": 1,
+      "is_bind_weibo": 1,
+      "environment": 1
+    }
+  }
+}

@@ -38,6 +38,8 @@
     "immutable": "4.0.0-rc.2",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^20.0.4",
+    "json-server": "^0.11.2",
+    "normalizr": "^3.2.3",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.0.0",
     "postcss-loader": "2.0.6",
@@ -66,6 +68,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
+    "api-server": "node scripts/json-server.js",
     "precommit": "yarn test",
     "prepush": "yarn test"
   },
