@@ -5,6 +5,10 @@
 import React from 'react'
 import {Switch} from 'react-router'
 import {Route} from 'react-router-dom'
+
+import './style/bootstrap.min.css'
+// import './style/bootstrap-theme.min.css'
+
 import Nav from './nav'
 import HomePage from './component/page/home'
 import HelloPage from './component/page/hello'

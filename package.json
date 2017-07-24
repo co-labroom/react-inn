@@ -39,12 +39,15 @@
     "isomorphic-fetch": "^2.2.1",
     "jest": "^20.0.4",
     "json-server": "^0.11.2",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
     "normalizr": "^3.2.3",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.0.0",
     "postcss-loader": "2.0.6",
     "promise": "7.1.1",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.31.1",
     "react-dev-utils": "^3.0.2",
     "react-dom": "^15.6.1",
     "react-error-overlay": "^1.0.9",
@@ -68,9 +71,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "api-server": "node scripts/json-server.js",
-    "precommit": "yarn test",
-    "prepush": "yarn test"
+    "api-server": "node scripts/json-server.js"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -106,5 +107,11 @@
   },
   "browserslist": [
     "> 1%"
-  ]
+  ],
+  "proxy": {
+    "/hr/*": {
+      "target": "http://localhost:8000",
+      "changeOrigin": true
+    }
+  }
 }

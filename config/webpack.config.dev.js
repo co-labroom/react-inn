@@ -43,8 +43,8 @@ module.exports = {
     // the line below with these two lines if you prefer the stock client:
     // require.resolve('webpack-dev-server/client') + '?/',
     // require.resolve('webpack/hot/dev-server'),
-    // require.resolve('react-dev-utils/webpackHotDevClient'),   //用于对webpackdevServer 通信，获取到文件的改变通知
-    require.resolve('react-hot-loader/patch'),
+    require.resolve('react-dev-utils/webpackHotDevClient'),   //用于对webpackdevServer 通信，获取到文件的改变通知
+    // require.resolve('react-hot-loader/patch'),
     // We ship a few polyfills by default:
     require.resolve('./polyfills'),
     // Errors should be considered fatal in development
@@ -140,6 +140,7 @@ module.exports = {
           /\.html$/,
           /\.(js|jsx)$/,
           /\.css$/,
+          /\.less$/,
           /\.json$/,
           /\.bmp$/,
           /\.gif$/,
@@ -214,6 +215,44 @@ module.exports = {
       },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.
+      // Add LESS-LOADER
+      {
+        test: /\.less$/,
+        use: [
+          require.resolve('style-loader'),
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              // Necessary for external CSS imports to work
+              // https://github.com/facebookincubator/create-react-app/issues/2677
+              ident: 'postcss',
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                autoprefixer({
+                  browsers: [
+                    '>1%',
+                    'last 4 versions',
+                    'Firefox ESR',
+                    'not ie < 9', // React doesn't support IE8 anyway
+                  ],
+                  flexbox: 'no-2009',
+                }),
+              ],
+            },
+          },
+          {
+            loader: require.resolve('less-loader'),
+            options: {
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
